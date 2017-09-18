@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./jquery.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+
+<span id="count_d"></span>
+    <script>
+        function zero_(time){
+            if(time<10){
+                time = '0'+time;
+            }
+            return time
+        }
+        function count_d(){
+            var timestamp_now = Date.parse(new Date());
+            timestamp_now = timestamp_now / 1000;
+
+            var startTime = "2017-09-18 21:00:00";
+            var timestamp_start = Date.parse(new Date(startTime));
+            timestamp_start = timestamp_start / 1000;
+
+            var count_d = timestamp_start*1-timestamp_now*1;
+            if(count_d <= 0){
+                console.log('活动已经开始');
+                $('#count_d').text('00天00时00分00秒');
+            }else{
+                var day = parseInt(count_d/86400);
+                day = zero_(day);
+                var remainder = count_d%86400  //86400;
+
+                var hour = parseInt(remainder/3600);
+                hour = zero_(hour);
+                var remainder = remainder%3600;
+
+                var min = parseInt(remainder/60);
+                min = zero_(min);
+                var remainder = remainder%60;
+
+                var s = remainder;
+                s = zero_(s);
+
+                console.log(day);
+                console.log(hour);
+                console.log(min);
+                console.log(s);
+                $('#count_d').text(day+'天'+hour+'时'+min+'分'+s+'秒');
+            }
+        }
+        setInterval('count_d()',1000);
+    </script></body>
+</html>
